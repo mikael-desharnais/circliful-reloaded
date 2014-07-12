@@ -52,3 +52,4 @@ function SVGDrawer(){
 			return center;
 		}
 }
+$.fn.circliful.settings.drawer = new SVGDrawer();

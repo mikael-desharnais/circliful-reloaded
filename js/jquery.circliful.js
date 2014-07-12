@@ -39,16 +39,18 @@
 
 			if (parent.settings['background-fill']){
 				context.beginPath();
-	            context.arc(this.canvas.width()/2, this.canvas.height()/2, parent.settings['background-radius'],  this.getAngleFromValue(0), this.getAngleFromValue(parent.settings.total), false);
+	            context.arc(this.canvas.width()/2, this.canvas.height()/2, parent.settings['background-radius']-1,  this.getAngleFromValue(0), this.getAngleFromValue(parent.settings.total), false);
             	context.fillStyle = parent.settings['background-fill-color'];
 	            context.fill();
 			}
+			context.beginPath();
+            context.arc(this.canvas.width()/2, this.canvas.height()/2, parent.settings['background-radius']-parent.settings['background-width']/2,  this.getAngleFromValue(0), this.getAngleFromValue(parent.settings.total), false);
             context.strokeStyle = parent.settings['background-stroke-color'];
             context.lineWidth = parent.settings['background-width'];
 			context.stroke();
 
 			context.beginPath();
-	        context.arc(this.canvas.width()/2, this.canvas.height()/2, parent.settings['foreground-radius'], this.getAngleFromValue(0), this.getAngleFromValue(parent.currentValue), false);
+	        context.arc(this.canvas.width()/2, this.canvas.height()/2, parent.settings['foreground-radius']-parent.settings['foreground-width']/2, this.getAngleFromValue(0), this.getAngleFromValue(parent.currentValue), false);
 	        context.strokeStyle = parent.settings['foreground-color'];
 	        context.lineWidth = parent.settings['foreground-width'];
 	        context.stroke();
@@ -90,8 +92,8 @@
 		        "foreground-radius": 90,				/* radius of the foreground circle arc */
 		        "foreground-width": 20,					/* width of the foreground circle arc */
 
-				"start-point" : -1,					/* start point for the foreground circle arc : is multiplied by Math.PI -0.5 corresponds to the top of a circle, 0 to the right point */
-				"max-angle" : 1,						/* max angle for the foreground circle arc : is multiplied by Math.PI 1 corresponds to a half circle, 2 to a full circle */
+				"start-point" : -0.5,					/* start point for the foreground circle arc : is multiplied by Math.PI -0.5 corresponds to the top of a circle, 0 to the right point */
+				"max-angle" : 2,						/* max angle for the foreground circle arc : is multiplied by Math.PI 1 corresponds to a half circle, 2 to a full circle */
 				
 				"time-between-frames" : 10,				/* milliseconds between each frame */
 

@@ -5,7 +5,7 @@
 	<link href="css/jquery.circliful.css" rel="stylesheet" type="text/css" />
 	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.4.min.js"></script>
 	<script src="js/jquery.circliful.js"></script>
 	<!--[if lt IE 10]><script src="js/jquery.circliful.ie8.js"></script><![endif]-->
 	
@@ -26,7 +26,6 @@
 	<script>
 	$( document ).ready(function() {
 		    var value = $('#myStathalf').circliful({
-		    	"display-style" : "half",
 				getText : function(){
 					if (this.usesTotal()){
 						return Math.round(this.getCurrentValue())+" kW";
