@@ -168,6 +168,15 @@
 		this.getHtmlContainer = function(){
 			return htmlContainer;
 		};
+		
+		/**
+		* @private
+		* Returns the context of the canvas
+		*/
+		this.setSetting = function(name,value){
+			this.settings[name]=value;
+			this.settings['drawer'].draw();
+		}
 
 		/**
 		* Defines the drawing method

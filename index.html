@@ -40,6 +40,9 @@
 			setInterval(function(){
 				$('#myStathalf').circliful('animateToValue',Math.round(Math.random()*100))
 			},5000);
+			setInterval(function(){
+				$('#myStathalf').circliful('setSetting','foreground-color','#'+Math.floor(Math.random()*16777215).toString(16));
+			},1000);
 		});
 	</script>
 
