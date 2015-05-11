@@ -168,6 +168,15 @@
 		this.getHtmlContainer = function(){
 			return htmlContainer;
 		};
+		/**
+		* @public
+		* Destroy the current circliful
+		*/
+		this.destroy = function(){
+			htmlContainer.empty();
+			htmlContainer.removeData('circliful');
+			htmlContainer.removeClass('circliful');
+		}
 		
 		/**
 		* @private

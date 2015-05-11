@@ -19,6 +19,7 @@
 	}
 
 	</style>
+	<button type="button" id="destroy">DESTROY</button>
 </head>
 <body>
 	<div id="myStathalf"></div>
@@ -37,12 +38,17 @@
 					return "Used power";
 				}
 			});
-			setInterval(function(){
+			var interval1 = setInterval(function(){
 				$('#myStathalf').circliful('animateToValue',Math.round(Math.random()*100))
 			},5000);
-			setInterval(function(){
+			var interval2 = setInterval(function(){
 				$('#myStathalf').circliful('setSetting','foreground-color','#'+Math.floor(Math.random()*16777215).toString(16));
 			},1000);
+			jQuery('#destroy').click(function(){
+				$('#myStathalf').circliful('destroy');
+				clearInterval(interval1);
+				clearInterval(interval2);
+			});
 		});
 	</script>
 
