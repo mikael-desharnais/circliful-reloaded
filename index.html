@@ -23,6 +23,7 @@
 </head>
 <body>
 	<div id="myStathalf"></div>
+	<div id="myStathalf2" style="position : absolute; right : 0;"></div>
 	<div class="tartine"></div>
 	<script>
 	$( document ).ready(function() {
@@ -36,7 +37,8 @@
 				},
 				getInfoText : function(){
 					return "Used power";
-				}
+				},
+				"dimension" : 300
 			});
 			var interval1 = setInterval(function(){
 				$('#myStathalf').circliful('animateToValue',Math.round(Math.random()*100))
@@ -48,6 +50,21 @@
 				$('#myStathalf').circliful('destroy');
 				clearInterval(interval1);
 				clearInterval(interval2);
+			});
+		});
+	$( document ).ready(function() {
+		    var value = $('#myStathalf2').circliful({
+				getText : function(){
+					if (this.usesTotal()){
+						return Math.round(this.getCurrentValue())+" kW";
+					}else {
+						return this.getCurrentValue()+" %";
+					}
+				},
+				getInfoText : function(){
+					return "Used power";
+				},
+				"dimension" : 300
 			});
 		});
 	</script>

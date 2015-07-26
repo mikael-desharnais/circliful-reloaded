@@ -75,13 +75,12 @@
 		}
 		
 	}
-	$.fn.circliful.settings = {"drawer"	: new CirclifulDrawer()};
 	/**
 	*	The Circliful Class
 	*	Its creation requires a DOM element
 	*/
 	function Circliful(htmlContainer){
-		var defaultSettings = $.extend($.fn.circliful.settings,{
+		var defaultSettings = {
 		        "background-radius": 100,				/* Radius of the background circle */
 		        "background-stroke-color": "#eee",		/* color of the outer background circle */
 		        "background-width": 20,					/* width of the outer background circle */
@@ -119,8 +118,7 @@
 					return "";
 				}
 
-		    });
-		    
+		    };
 		this.circleText = $('<span></span>');
 		this.infoText = $('<span></span>');
 		this.icon = $('<i></i>');
@@ -136,7 +134,7 @@
 		* Updates the display
 		*/
 		this.init = function(options){
-			this.settings = $.extend(defaultSettings);
+			this.settings = $.extend({},defaultSettings);
 			for(var i in options){
 				if (typeof this.settings[i] != "undefined"){
 					this.settings[i] = options[i]
@@ -148,6 +146,9 @@
 				if (typeof this.settings[i] != "undefined"){
 					this.settings[i]=htmlContainer.data(i);
 				}
+			}
+			if (typeof this.settings.drawer == "undefined"){
+				this.settings.drawer = new CirclifulDrawer();
 			}
 			this.setDrawer(this.settings.drawer);
 			htmlContainer.append(this.circleText);
