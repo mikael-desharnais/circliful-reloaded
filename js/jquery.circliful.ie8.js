@@ -50,5 +50,6 @@ function VMLDrawer(){
 		return Math.floor(Math.min(360,Math.max(-360,(parent.settings['start-point']+value/parent.settings.total*parent.settings['max-angle'])*180+90)));
 	}
 }
-$.fn.circliful.settings.drawer = new VMLDrawer();
+$.fn.circliful.drawer = VMLDrawer;
+
 

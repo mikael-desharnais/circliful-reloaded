@@ -38,7 +38,9 @@ function SVGDrawer(){
 		}
 		this.setSize = function(width,height){
 			this.dimension = { width : width, height : height };
-			this.svg.attr(this.dimension);
+			this.svg.width(width);
+			this.svg.height(height);
+			
 		}
 		/**
 		* @private
@@ -52,4 +54,4 @@ function SVGDrawer(){
 			return center;
 		}
 }
-$.fn.circliful.settings.drawer = new SVGDrawer();
+$.fn.circliful.drawer = SVGDrawer;

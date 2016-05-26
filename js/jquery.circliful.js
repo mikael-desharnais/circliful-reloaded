@@ -14,6 +14,9 @@
 			if (typeof jQuery(element).data('circliful') == "undefined"){
 				jQuery(element).data('circliful', new Circliful(jQuery(element)));
 				method = "init";
+				if (typeof $.fn.circliful.drawer !== "undefined"){
+					argumentsToPass[0].drawer = new ($.fn.circliful.drawer)();
+				}
 			}
 			jQuery(element).data('circliful')[method].apply(jQuery(element).data('circliful'),argumentsToPass);
 		});
@@ -116,7 +119,8 @@
 				},
 				getInfoText : function(){				/*	method called to obtain the text of the info text */
 					return "";
-				}
+				},
+				drawer : new CirclifulDrawer()
 
 		    };
 		this.circleText = $('<span></span>');
@@ -146,9 +150,6 @@
 				if (typeof this.settings[i] != "undefined"){
 					this.settings[i]=htmlContainer.data(i);
 				}
-			}
-			if (typeof this.settings.drawer == "undefined"){
-				this.settings.drawer = new CirclifulDrawer();
 			}
 			this.setDrawer(this.settings.drawer);
 			htmlContainer.append(this.circleText);
