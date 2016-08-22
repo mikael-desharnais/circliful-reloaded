@@ -29,12 +29,11 @@ function SVGDrawer(){
 		this.draw = function(){
 			var startPoint = this.getPointFromValue(0,parent.settings['background-radius']);
 			var endPoint = this.getPointFromValue(parent.settings.total*0.99999,parent.settings['background-radius']);
-			this.background.attr({ d: "M "+startPoint.x+" "+startPoint.y+" A "+parent.settings['background-radius']+" "+parent.settings['background-radius']+" 0 1 1 "+(endPoint.x)+" "+(endPoint.y), stroke: parent.settings['background-stroke-color'], 'stroke-width': parent.settings['background-width'], fill: parent.settings['background-fill']?parent.settings['background-fill-color']:"transparent" });
+			this.background.attr({ d: "M "+startPoint.x+" "+startPoint.y+" A "+parent.settings['background-radius']+" "+parent.settings['background-radius']+" 0 "+(parent.settings['max-angle']<1?"0":"1")+" 1 "+(endPoint.x)+" "+(endPoint.y), stroke: parent.settings['background-stroke-color'], 'stroke-width': parent.settings['background-width'], fill: parent.settings['background-fill']?parent.settings['background-fill-color']:"transparent" });
 
 			var startPoint = this.getPointFromValue(0,parent.settings['foreground-radius']);
 			var endPoint = this.getPointFromValue(parent.currentValue*0.99999,parent.settings['foreground-radius']);
-			console.log();
-			this.foreground.attr({ d: "M "+startPoint.x+" "+startPoint.y+" A "+parent.settings['foreground-radius']+" "+parent.settings['foreground-radius']+" 0 "+(this.getAngleFromValue(parent.currentValue*0.99999)>0?"1":"0")+" 1 "+(endPoint.x)+" "+(endPoint.y), stroke: parent.settings['foreground-color'], 'stroke-width': parent.settings['foreground-width'] ,"fill" : "transparent"});
+			this.foreground.attr({ d: "M "+startPoint.x+" "+startPoint.y+" A "+parent.settings['foreground-radius']+" "+parent.settings['foreground-radius']+" 0 "+(this.getRelativeAngleFromValue(parent.currentValue*0.99999)>1?"1":"0")+" 1 "+(endPoint.x)+" "+(endPoint.y), stroke: parent.settings['foreground-color'], 'stroke-width': parent.settings['foreground-width'] ,"fill" : "transparent"});
 
 		}
 		this.setSize = function(width,height){
@@ -47,8 +46,11 @@ function SVGDrawer(){
 		* @private
 		* Calculate the angle corresponding to the given value
 		*/
+		this.getRelativeAngleFromValue = function(value){
+			return value/parent.settings.total*parent.settings['max-angle'];
+		}
 		this.getAngleFromValue = function(value){
-			return (parent.settings['start-point']+value/parent.settings.total*parent.settings['max-angle']);
+			return (parent.settings['start-point']+this.getRelativeAngleFromValue(value));
 		}
 		this.getPointFromValue = function(value,radius){
 			var angle = this.getAngleFromValue(value)*Math.PI;
