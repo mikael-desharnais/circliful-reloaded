@@ -33,7 +33,8 @@ function SVGDrawer(){
 
 			var startPoint = this.getPointFromValue(0,parent.settings['foreground-radius']);
 			var endPoint = this.getPointFromValue(parent.currentValue*0.99999,parent.settings['foreground-radius']);
-			this.foreground.attr({ d: "M "+startPoint.x+" "+startPoint.y+" A "+parent.settings['foreground-radius']+" "+parent.settings['foreground-radius']+" 0 "+(parent.currentValue/parent.settings.total>0.5?"1":"0")+" 1 "+(endPoint.x)+" "+(endPoint.y), stroke: parent.settings['foreground-color'], 'stroke-width': parent.settings['foreground-width'] ,"fill" : "transparent"});
+			console.log();
+			this.foreground.attr({ d: "M "+startPoint.x+" "+startPoint.y+" A "+parent.settings['foreground-radius']+" "+parent.settings['foreground-radius']+" 0 "+(this.getAngleFromValue(parent.currentValue*0.99999)>0?"1":"0")+" 1 "+(endPoint.x)+" "+(endPoint.y), stroke: parent.settings['foreground-color'], 'stroke-width': parent.settings['foreground-width'] ,"fill" : "transparent"});
 
 		}
 		this.setSize = function(width,height){
@@ -46,8 +47,11 @@ function SVGDrawer(){
 		* @private
 		* Calculate the angle corresponding to the given value
 		*/
+		this.getAngleFromValue = function(value){
+			return (parent.settings['start-point']+value/parent.settings.total*parent.settings['max-angle']);
+		}
 		this.getPointFromValue = function(value,radius){
-			var angle = (parent.settings['start-point']+value/parent.settings.total*parent.settings['max-angle'])*Math.PI;
+			var angle = this.getAngleFromValue(value)*Math.PI;
 			var center = { x : this.dimension.width/2 , y : this.dimension.height/2};
 			center.x += radius*Math.cos(angle);
 			center.y += radius*Math.sin(angle);
